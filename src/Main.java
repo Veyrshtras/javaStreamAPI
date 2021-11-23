@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,6 +36,42 @@ public class Main {
                 .forEach(personName -> System.out.println(personName));
 
         System.out.println("fifth expression. ");
+        System.out.println(Stream.of(2, 7, 5, 3, 8, 11, 9)
+                .reduce(0, Integer::sum));
+
+        System.out.println("sixth expression. ");
+        System.out.println(Person.init()
+                .stream()
+                .allMatch(person -> person.getId()>0));
+        System.out.println(Person.init()
+                .stream()
+                .anyMatch(person -> person.getId()>4));
+        System.out.println(Person.init()
+                .stream()
+                .findFirst().get().getName());
+        System.out.println(Person.init()
+                .stream()
+                .filter(person -> person.getId()>3)
+                .findAny().get().getName());
+
+
+        System.out.println("seventh expression. ");
+        Map<String, Long>persons=Person.init()
+                .stream()
+                .collect(Collectors.groupingBy(person -> person.getName(),Collectors.counting()));
+
+        System.out.println(persons);
+        //{Alex=1, Mike=1, Tom=1, Jay=1, Sean=1, Lee=1, Jhon=1}
+        Person.init()
+                .stream()
+                .collect(Collectors.groupingBy(person->person.getName().length()))
+                .forEach((integer, people) -> System.out.println(integer+"=>"+people.stream()
+                                .map(person -> person.getName())
+                        .collect(Collectors.toList())));
+        //Answers are below
+//        3=>[Jay, Lee]
+//        4=>[Sean, Jhon, Mike, Alex]
+//        5=>[Tommy]
 
     }
 }

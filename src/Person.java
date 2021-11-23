@@ -26,7 +26,7 @@ public class Person {
         persons.add(new Person(3, "Lee"));
         persons.add(new Person(4, "Jhon"));
         persons.add(new Person(5, "Mike"));
-        persons.add(new Person(6, "Tom"));
+        persons.add(new Person(6, "Tommy"));
         persons.add(new Person(7, "Alex"));
 
         return persons;
