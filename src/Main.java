@@ -6,20 +6,35 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-//        List<Integer> items= Arrays.asList(1,2,3,4,5,3,2,6);
-//        Stream sum=items.stream().
-//                distinct();
-//
-//        sum.forEach(integer -> System.out.println(integer));
 
-        List<Person> persons = Person.person();
-        persons.add(new Person(1,"Sean"));
-        persons.add(new Person(2,"John"));
-        persons.add(new Person(3,"Lea"));
+        // Java Stream API
 
-        persons.stream()
-                .map(Person::getName)
+        System.out.println("first expression. ");
+        Person.init().forEach(person -> System.out.println(person.getName()));
+
+        System.out.println("second expression.");
+        Person.init()
+                .stream()
+                .filter(person -> person.getId()>3)
+                .collect(Collectors.toList())
+                .forEach(person -> {
+                    System.out.println(person.getName());
+                });
+        System.out.println("third expression. ");
+        Stream.of(23,5,34,12,7,9,27)
+                .filter(integer -> integer>18)
+                .map(integer -> Math.sqrt((double)integer))
                 .collect(Collectors.toCollection(TreeSet::new))
-                .forEach(person -> System.out.println(person));
+                .forEach(aDouble -> System.out.println(aDouble));
+
+        System.out.println("fourth expression. ");
+        Person.init()
+                .stream()
+                .map(person -> person.getName())
+                .sorted()
+                .forEach(personName -> System.out.println(personName));
+
+        System.out.println("fifth expression. ");
+
     }
 }
